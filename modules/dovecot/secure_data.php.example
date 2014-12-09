@@ -1,0 +1,8 @@
+<?php
+	
+	// Place secure and sensitive data here
+	$mysql_server = "localhost";
+	$mysql_user = "username";
+	$mysql_pass = "password";
+	
+?>

@@ -1,0 +1,18 @@
+<?php
+	
+	/* PDAconfig
+	 * 
+	 * scripted by Michael Tanner for Schleuniger Montagen AG
+	 * www.white-tiger.ch
+	 * www.schleuniger-montagen.ch
+	 */
+	
+	// settings for mysql connection
+	
+	$server = 'localhost';
+	$user = 'username';
+	$pass = 'password';
+	
+	$database = 'pdaconfig';
+	
+?>
