@@ -1,0 +1,2 @@
+Module can be disabled by its name.
+Example of disabled Apache module: mod_3apache.disabled.php
