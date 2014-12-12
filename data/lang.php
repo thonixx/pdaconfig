@@ -16,10 +16,10 @@
 	$language['en']['language'] = 'en';
 	$language['en']['software'] = 'PDAconfig';
 	$language['en']['pdaconfigtitle'] = 'PDAconfig | Server configuration tool';
-	$language['en']['copyright'] = 'Copyright 2012 @ Schleuniger Montagen AG';
+	$language['en']['copyright'] = 'Copyright '.date('Y').' @ github.com/thonixx';
 	$language['en']['mysqlconnect'] = 'Database error: connection to mysql server failed';
 	$language['en']['mysqlselectdb'] = 'Database error: could not select database';
-	$language['en']['logindialogtitle'] = 'PDAconfig &gt; Please log in to get access';
+	$language['en']['logindialogtitle'] = 'PDAconfig Authentication';
 	$language['en']['usernameinput'] = 'Your username';
 	$language['en']['loginbutton'] = 'Login';
 	$language['en']['capslock'] = 'Capslock activated';
