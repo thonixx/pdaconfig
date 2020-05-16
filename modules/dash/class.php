@@ -1,32 +1,34 @@
 <?php
-	
+
 	// dashboard class
-	
+
 	class useradmin {
 		// initialize public variables
-		
+
 		// initialize private variables
 		private $sql = '';
 		private $query = '';
 		private $userRights = '';
 		private $pdaconfigRight = '';
 		private $return = '';
-		
+
 		public function __construct() {
 			global $userPref;
+            global $mysql_connect;
+            $this->mysqli_link = $mysql_connect;
 			// load user privileges into private variable for using in other classes
 			$this->userRights = $userPref;
 			$this->pdaconfigRight = $this->userRights['dash'];
 		}
-		
+
 		// list everything in a nice table
 		public function mkTable() {
 			global $modDir;
 			global $module;
-			
+
 			$this->sql = 'SELECT * FROM `authentication` INNER JOIN `group` on `group`.`id` = `authentication`.`group`';
 			$this->query = $this->loadQuery();
-			
+
 			// construct the whole table
 			$this->return = '<table>';
 				$this->return .= '<tr>
@@ -37,7 +39,7 @@
 									<th style="width: 15%;">&nbsp;</th>
 								</tr>';
 				$counter = 1;
-				while($userEntry = mysql_fetch_array($this->query)) {
+				while($userEntry = mysqli_fetch_array($this->query)) {
 					$this->return .= '<tr';
 					if(is_float($counter/2)) $this->return .= ' class="background"';
 					if($userEntry[0] == $_GET['delUser'] or $userEntry[0] == $_GET['editUser']) $this->return .= ' style="color: red;"';
@@ -55,15 +57,15 @@
 					$counter++;
 				}
 			$this->return .= '</table>';
-			
+
 			return $this->return;
 		}
-		
+
 		// execute mysql query
 		private function loadQuery() {
-			$this->return = mysql_query($this->sql) or die($this->lang['loadqueryfailed'].' '.mysql_error());
+			$this->return = mysqli_query($this->mysqli_link, $this->sql) or die($this->lang['loadqueryfailed'].' '.mysqli_error());
 			return $this->return;
 		}
 	}
-	
+
 ?>

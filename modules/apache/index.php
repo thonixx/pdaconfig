@@ -1,23 +1,23 @@
 <?php
-	
+
 	/* PDAconfig MODULE
-	 * 
+	 *
 	 * scripted by Michael Tanner for Schleuniger Montagen AG
 	 * www.white-tiger.ch
 	 * www.schleuniger-montagen.ch
 	 */
-	
+
 	// create the class used in this module
 	$apache = new apache();
 	// addDomain for adding a new domain
 	// rmDomain to remove a domain
 	// rebuild to parse the database values into hard written files for apache2
-	
+
 	// for debugging purposes
 	//echo 'Adding pixelcraft.ch: '.$apache->addDomain('pixelcraft.ch', '/var/www', array('www.pixelcraft.ch', 'sub.pixelcraft.ch'));
 	//echo '<br />Removing pixelwolf.ch: '.$apache->rmDomain('pixelwolf.ch');
 	//echo '<br />Rebuild: '.$apache->rebuild();
-	
+
 ?>
 <div class="pda-content tworow">
 	<h2><?php echo lang('apachetitle') ?></h2>
@@ -29,14 +29,14 @@
 			<?php echo lang('rebuildtext') ?><br />
 			<a href="?module=<?php echo $_GET['module'] ?>&amp;config=rebuild"><?php echo lang('rebuildlink') ?></a>
 			<?php
-				
+
 				// rebuild configuration
 				if($_GET['config'] == 'rebuild') {
 					echo '<br />';
 					echo $apache->rebuild();
 					echo '<br />';
 				}
-				
+
 			?>
 		</p>
 		<!-- Form for adding new/editing domains or dialog for requesting deletion -->
@@ -45,10 +45,10 @@
 				<div id="edit" style="margin: 25px 0pt;" class="border">
 					<h2>Do you really want to delete the entry?</h2>
 					<?php
-						
+
 						// reask to be sure
 						if(!isset($_GET['reallyDelete'])) {
-					
+
 					?>
 					<p style="padding: 0pt 20px;">
 						<a href="?module=<?php echo $_GET['module'] ?>&amp;delete=<?php echo $_GET['delete'] ?>&amp;reallyDelete=<?php echo $_GET['delete'] ?>#edit">
@@ -57,13 +57,13 @@
 							<img src="img/no.png" alt="Yes"> No, do not delete it</a>
 					</p>
 					<?php
-						
+
 						} else {
 							echo '<p style="padding: 0pt 20px;">';
 							echo $apache->rmDomain($_GET['reallyDelete']);
 							echo '</p>';
 						}
-						
+
 					?>
 				</div>
 			<?php } else { ?>
@@ -72,62 +72,62 @@
 					<div style="padding: 15px 15px 0 15px">
 						<p><?php echo lang('rebuildtext') ?></p>
 						<?php
-							
+
 							// if editing a domain read everything out of a query
 							if($_GET['edit'] == true) {
-								$editquery = mysql_query('SELECT apache_vhost.servername, documentroot, `option` FROM apache_vhost LEFT JOIN apache_custom on apache_vhost.servername = apache_custom.servername WHERE apache_vhost.servername = "'.mysql_real_escape_string($_GET['edit']).'"');
-								$sql = mysql_fetch_assoc($editquery);
-								echo mysql_error();
-								
+								$editquery = mysqli_query($mysql_connect, 'SELECT apache_vhost.servername, documentroot, `option` FROM apache_vhost LEFT JOIN apache_custom on apache_vhost.servername = apache_custom.servername WHERE apache_vhost.servername = "'.mysqli_real_escape_string($mysql_connect, $_GET['edit']).'"');
+								$sql = mysqli_fetch_assoc($editquery);
+								echo mysqli_error();
+
 								// build server aliases string
-								$aliasquery = mysql_query('SELECT * FROM apache_aliases WHERE servername ="'.mysql_real_escape_string($_GET['edit']).'"');
+								$aliasquery = mysqli_query($mysql_connect, 'SELECT * FROM apache_aliases WHERE servername ="'.mysqli_real_escape_string($mysql_connect, $_GET['edit']).'"');
 								$serveraliases = '';
-								while($aliases = mysql_fetch_array($aliasquery)) {
+								while($aliases = mysqli_fetch_array($aliasquery)) {
 									$serveraliases .= $aliases['serveralias']."\n";
 								}
 								$serveraliases = trim($serveraliases); // remove unnecessary space at the end
-								
+
 								if(isset($_POST['submit'])) {
 									// update main vhost
-									$updateSQL = 'UPDATE apache_vhost SET servername = "'.mysql_real_escape_string($_POST['servername']).'", documentroot = "'.mysql_real_escape_string($_POST['documentroot']).'" WHERE servername = "'.mysql_real_escape_string($_GET['edit']).'"';
-									$updateQuery = mysql_query($updateSQL);
-									
+									$updateSQL = 'UPDATE apache_vhost SET servername = "'.mysqli_real_escape_string($mysql_connect, $_POST['servername']).'", documentroot = "'.mysqli_real_escape_string($mysql_connect, $_POST['documentroot']).'" WHERE servername = "'.mysqli_real_escape_string($mysql_connect, $_GET['edit']).'"';
+									$updateQuery = mysqli_query($mysql_connect, $updateSQL);
+
 									// update aliases
 									$aliasArray = explode("\n", $_POST['serveralias']);
 									// first remove current aliases
-									mysql_query('DELETE FROM apache_aliases WHERE servername = "'.mysql_real_escape_string($_POST['servername']).'"');
+									mysqli_query($mysql_connect, 'DELETE FROM apache_aliases WHERE servername = "'.mysqli_real_escape_string($mysql_connect, $_POST['servername']).'"');
 									// then insert every alias again
 									foreach($aliasArray as $alias) {
-										mysql_query('INSERT INTO apache_aliases (servername, serveralias) values("'.mysql_real_escape_string($_POST['servername']).'", "'.mysql_real_escape_string($alias).'")');
-										if(mysql_error() == true) echo lang('fail');
+										mysqli_query($mysql_connect, 'INSERT INTO apache_aliases (servername, serveralias) values("'.mysqli_real_escape_string($mysql_connect, $_POST['servername']).'", "'.mysqli_real_escape_string($mysql_connect, $alias).'")');
+										if(mysqli_error() == true) echo lang('fail');
 									}
 									// and at least insert the custom configuration
 									// look for existing entry
-									$cust_exist = mysql_fetch_assoc(mysql_query('SELECT `servername` FROM apache_custom WHERE servername = "'.mysql_real_escape_string($_POST['servername']).'"'));
+									$cust_exist = mysqli_fetch_assoc(mysqli_query($mysql_connect, 'SELECT `servername` FROM apache_custom WHERE servername = "'.mysqli_real_escape_string($mysql_connect, $_POST['servername']).'"'));
 									if($cust_exist['servername'] == $_POST['servername']) {
-										mysql_query('UPDATE apache_custom SET `option` = "'.mysql_real_escape_string($_POST['custom']).'" WHERE servername = "'.mysql_real_escape_string($_POST['servername']).'"');
+										mysqli_query($mysql_connect, 'UPDATE apache_custom SET `option` = "'.mysqli_real_escape_string($mysql_connect, $_POST['custom']).'" WHERE servername = "'.mysqli_real_escape_string($mysql_connect, $_POST['servername']).'"');
 									} else {
-										mysql_query('INSERT INTO apache_custom (servername, `option`) VALUES ("'.mysql_real_escape_string($_POST['servername']).'", "'.mysql_real_escape_string($_POST['custom']).'")');
+										mysqli_query($mysql_connect, 'INSERT INTO apache_custom (servername, `option`) VALUES ("'.mysqli_real_escape_string($mysql_connect, $_POST['servername']).'", "'.mysqli_real_escape_string($mysql_connect, $_POST['custom']).'")');
 									}
-									
-									if(mysql_error() == false) echo '<span class="green medium bold">'.lang('success').'</span><br /><br />';
-									else echo '<span class="red medium bold">'.lang('fail').mysql_error().'</span><br /><br />';
+
+									if(mysqli_error() == false) echo '<span class="green medium bold">'.lang('success').'</span><br /><br />';
+									else echo '<span class="red medium bold">'.lang('fail').mysqli_error().'</span><br /><br />';
 								}
 								// reread the data to be sure to have the most recent data
-								$editquery = mysql_query('SELECT apache_vhost.servername, documentroot, `option` FROM apache_vhost LEFT JOIN apache_custom on apache_vhost.servername = apache_custom.servername WHERE apache_vhost.servername = "'.mysql_real_escape_string($_GET['edit']).'"');
-								$sql = mysql_fetch_assoc($editquery);
+								$editquery = mysqli_query($mysql_connect, 'SELECT apache_vhost.servername, documentroot, `option` FROM apache_vhost LEFT JOIN apache_custom on apache_vhost.servername = apache_custom.servername WHERE apache_vhost.servername = "'.mysqli_real_escape_string($mysql_connect, $_GET['edit']).'"');
+								$sql = mysqli_fetch_assoc($editquery);
 							}
-							
+
 							if(isset($_POST['submit']) and !isset($_GET['edit'])) {
 								// build alias array
 								$aliasArray = explode("\n", $_POST['serveralias']);
 								if(count($aliasArray) > 0) $aliases = $aliasArray;
 								else $aliases = false;
-								
+
 								// adding the configuration
 								echo $apache->addDomain($_POST['servername'], $_POST['documentroot'], $aliases, $_POST['custom']).'<br /><br />';
 							}
-							
+
 						?>
 						<?php echo lang('maindomain'); ?>: <br />
 							<input type="text" name="servername" value="<?php echo $_POST['servername'] ? $_POST['servername'] : $sql['servername'] ?>" /><br />
@@ -137,7 +137,7 @@
 							<input type="text" name="documentroot" value="<?php echo $_POST['documentroot'] ? $_POST['documentroot'] : $sql['documentroot'] ?>" /><br />
 						<?php echo lang('customopts'); ?>: <br />
 							<textarea name="custom"><?php echo $_POST['custom'] ? $_POST['custom'] : $sql['option'] ?></textarea><br />
-						
+
 						<br /><input type="submit" name="submit" value="Save" /></div>
 				</form>
 			<?php } ?>
@@ -151,11 +151,11 @@
 				<th>Options</th>
 			</tr>
 			<?php
-			
+
 				// list all domains, aliases and document roots
-				$query = mysql_query('SELECT * FROM apache_vhost');
-				
-				while($vhost = mysql_fetch_array($query)) {
+				$query = mysqli_query($mysql_connect, 'SELECT * FROM apache_vhost');
+
+				while($vhost = mysqli_fetch_array($query)) {
 					echo '<tr class="aligntop';
 					if(is_float($counter/2)) echo ' background';
 					echo '"';
@@ -163,24 +163,24 @@
 					echo '>';
 						echo '<td class="aligntop">'.$vhost['servername'].'</td>';
 						echo '<td>';
-							
+
 							// now list all server aliases if available
 							$somethingThere = false;
-							$aliasQuery = mysql_query('SELECT serveralias FROM apache_aliases WHERE servername = "'.$vhost['servername'].'"');
-							while ($alias = mysql_fetch_array($aliasQuery)) {
+							$aliasQuery = mysqli_query($mysql_connect, 'SELECT serveralias FROM apache_aliases WHERE servername = "'.$vhost['servername'].'"');
+							while ($alias = mysqli_fetch_array($aliasQuery)) {
 								if($alias['serveralias'] == true) {
 									echo $alias['serveralias'].'<br />';
 									$somethingThere = true;
 								}
 							}
 							if($somethingThere == false) echo '<span class="grey small">'.lang('noaliases').'</span>';
-							
+
 						echo '</td>';
 						echo '<td>'.limit($vhost['documentroot'], 35, true).'</td>';
 						echo '<td><a href="?module='.$_GET['module'].'&amp;edit='.$vhost['servername'].'#edit"><img src="modules/'.$_GET['module'].'/edit.png" alt="Edit"></a> <a href="?module='.$_GET['module'].'&amp;delete='.$vhost['servername'].'#edit"><img src="modules/'.$_GET['module'].'/delete.png" alt="delete"></a></td>';
 					echo '</tr>';
 				}
-			
+
 			?>
 		</table>
 		<div class="clear"></div>
@@ -192,18 +192,18 @@
 		<?php echo lang('descriptionstatistics') ?>
 		<p>
 			<?php
-				
+
 				// query for statistical purposes
-				$statQuery = mysql_query('SELECT COUNT("servername") FROM `apache_vhost`');
-				$statArray = mysql_fetch_array($statQuery);
+				$statQuery = mysqli_query($mysql_connect, 'SELECT COUNT("servername") FROM `apache_vhost`');
+				$statArray = mysqli_fetch_array($statQuery);
 				$amountAccounts = $statArray['COUNT("servername")'];
 				echo '<span class="blue">'.lang('usedvhosts').':</span> '.$statArray['COUNT("servername")'].'<br />';
-				
-				$statQuery = mysql_query('SELECT COUNT("serveralias") FROM `apache_aliases`');
-				$statArray = mysql_fetch_array($statQuery);
+
+				$statQuery = mysqli_query($mysql_connect, 'SELECT COUNT("serveralias") FROM `apache_aliases`');
+				$statArray = mysqli_fetch_array($statQuery);
 				echo '<span class="blue">'.lang('usedaliases').':</span> '.$statArray['COUNT("serveralias")'].'<br />';
 				// for every email account there is one alias. so you have to subtract them.
-			
+
 			?>
 		</p>
 	</div>
@@ -215,13 +215,13 @@
 		</div>
 		<p>
 			<?php
-				
+
 				// restart service
 				if($_GET['server'] == 'restart') {
 					echo service('apache2', 'restart');
 					echo service('mysql', 'restart');
 				}
-				
+
 			?>
 			<a href="<?php echo $request_url ?>&amp;server=restart">&raquo; <?php echo lang('restart') ?></a>
 		</p>

@@ -1,21 +1,21 @@
 <?php
-	
+
 	/* PDAconfig MODULE
-	 * 
+	 *
 	 * scripted by Michael Tanner for Schleuniger Montagen AG
 	 * www.white-tiger.ch
 	 * www.schleuniger-montagen.ch
 	 */
-	
+
 ?>
 <div class="pda-dash">
 	<?php
-		
+
 		if($_GET['editUser'] and $userPref['dash'] >= 6) {
-			$getQuery = mysql_query('SELECT * FROM `authentication` INNER JOIN `group` on `group`.`id` = `authentication`.`group` WHERE `authentication`.`id` = '.mysql_real_escape_string($_GET['editUser']));
-			$getAssoc = mysql_fetch_assoc($getQuery);
+			$getQuery = mysqli_query($mysql_connect, 'SELECT * FROM `authentication` INNER JOIN `group` on `group`.`id` = `authentication`.`group` WHERE `authentication`.`id` = '.mysqli_real_escape_string($mysql_connect, $_GET['editUser']));
+			$getAssoc = mysqli_fetch_assoc($getQuery);
 			$fehler = false;
-			
+
 			?>
 			<h2><?php echo lang('editinguser') ?></h2>
 			<div class="pda-main-content">
@@ -33,27 +33,27 @@
 							if($_POST['language'] == false and isset($_POST['submit'])) {echo '<br /><span class="red">'.lang('mustnotbeempty').'<br /></span>';$fehler = true;}
 							?><br />
 						<?php echo lang('group'); ?>:<br /><select name="group"><?php
-							
-							$groupQuery = mysql_query('SELECT `id`, `name` FROM `group`');
-							
-							while($group = mysql_fetch_array($groupQuery)) {
+
+							$groupQuery = mysqli_query($mysql_connect, 'SELECT `id`, `name` FROM `group`');
+
+							while($group = mysqli_fetch_array($groupQuery)) {
 								echo '<option ';
 								// to mark group as selected from current users group
 								if($group['id'] == $getAssoc['group'] or $group['id'] == $_POST['group']) echo 'selected="selected"';
 								echo ' value="'.$group['id'].'">'.$group['name'].'</option>';
 							}
-						
+
 						?></select><br />
 						<br />
 						<input type="submit" name="submit" value="<?php echo lang('savebutton'); ?>" />
 						<?php
 							// save data if no error was found
 							if(isset($_POST['submit']) and $fehler == false) {
-								$updateSQL = 'UPDATE `authentication` SET `username` = "'.mysql_real_escape_string($_POST['username']).'", `realname` = "'.mysql_real_escape_string($_POST['realname']).'", `lang` = "'.mysql_real_escape_string($_POST['language']).'", `group` = '.mysql_real_escape_string($_POST['group']);
+								$updateSQL = 'UPDATE `authentication` SET `username` = "'.mysqli_real_escape_string($mysql_connect, $_POST['username']).'", `realname` = "'.mysqli_real_escape_string($mysql_connect, $_POST['realname']).'", `lang` = "'.mysqli_real_escape_string($mysql_connect, $_POST['language']).'", `group` = '.mysqli_real_escape_string($mysql_connect, $_POST['group']);
 								if($_POST['password'] == $_POST['repeatpassword'] and !empty($_POST['password'])) $updateSQL .= ', `password` = MD5("'.$_POST['password'].'")';
-								$updateSQL .= ' WHERE `id` = '.mysql_real_escape_string($_GET['editUser']);
-								
-								if(mysql_query($updateSQL) == true) echo '<p class="green medium">'.lang('successfulsaved').'</p>';
+								$updateSQL .= ' WHERE `id` = '.mysqli_real_escape_string($mysql_connect, $_GET['editUser']);
+
+								if(mysqli_query($mysql_connect, $updateSQL) == true) echo '<p class="green medium">'.lang('successfulsaved').'</p>';
 								else echo '<p class="red medium">'.lang('failedsaving').'</p>';
 							}
 						?>
@@ -70,7 +70,7 @@
 					<?php
 						if($_GET['reallyDelete'] > 1) {
 							// to prevent deleting an admin user
-							if(mysql_query('DELETE FROM `authentication` WHERE `id` = '.mysql_real_escape_string($_GET['reallyDelete'])))
+							if(mysqli_query($mysql_connect, 'DELETE FROM `authentication` WHERE `id` = '.mysqli_real_escape_string($mysql_connect, $_GET['reallyDelete'])))
 								echo '<p class="medium bold green">'.lang('success').'</p>';
 							else
 								echo '<p class="medium bold red">'.lang('fail').'</p>';
@@ -107,14 +107,14 @@
 	?>
 </div>
 <div class="pda-dash">
-	
+
 	<!-- List current users from database -->
 	<h2><?php echo lang('useradmin_title'); ?></h2>
 	<div class="pda-main-content">
 		<p><?php echo lang('introduction_useradmin'); ?></p>
 		<?php include($modDir.'useradmin.php') ?>
 	</div>
-	
+
 	<!-- Adding a new entry to the user database if user has permission -->
 	<?php
 		if($userPref['dash'] >= 6) { // check permission
@@ -137,16 +137,16 @@
 							if($_POST['language'] == false and isset($_POST['submit'])) {echo '<br /><span class="red">'.lang('mustnotbeempty').'<br /></span>';$fehler = true;}
 							?><br />
 						<?php echo lang('group'); ?>:<br /><select name="group"><?php
-							
-							$groupQuery = mysql_query('SELECT `id`, `name` FROM `group`');
-							
-							while($group = mysql_fetch_array($groupQuery)) {
+
+							$groupQuery = mysqli_query($mysql_connect, 'SELECT `id`, `name` FROM `group`');
+
+							while($group = mysqli_fetch_array($groupQuery)) {
 								echo '<option ';
 								// to mark group as selected from current users group
 								if($group['id'] == $getAssoc['group'] or $group['id'] == $_POST['group']) echo 'selected="selected"';
 								echo ' value="'.$group['id'].'">'.$group['name'].'</option>';
 							}
-						
+
 						?></select><br />
 						<br />
 						<input type="submit" name="submit" value="<?php echo lang('savebutton'); ?>" />
@@ -154,9 +154,9 @@
 							// save data if no error was found
 							if(isset($_POST['submit']) and $fehler == false) {
 								$insertSQL = 'INSERT INTO `authentication` (`username`, `password`, `realname`, `lang`, `group`)
-												VALUES ("'.mysql_real_escape_string($_POST['username']).'", MD5("'.mysql_real_escape_string($_POST['password']).'"), "'.mysql_real_escape_string($_POST['realname']).'", "'.mysql_real_escape_string($_POST['language']).'", "'.mysql_real_escape_string($_POST['group']).'")';
-								
-								if(mysql_query($insertSQL))
+												VALUES ("'.mysqli_real_escape_string($mysql_connect, $_POST['username']).'", MD5("'.mysqli_real_escape_string($mysql_connect, $_POST['password']).'"), "'.mysqli_real_escape_string($mysql_connect, $_POST['realname']).'", "'.mysqli_real_escape_string($mysql_connect, $_POST['language']).'", "'.mysqli_real_escape_string($mysql_connect, $_POST['group']).'")';
+
+								if(mysqli_query($mysql_connect, $insertSQL))
 									echo '<p class="medium bold green">'.lang('success').'</p>';
 								else
 									echo '<p class="red medium">'.lang('failedsaving').'</p>';
@@ -165,9 +165,9 @@
 					</div>
 				</form>
 		</div>
-	<?php 
+	<?php
 			if($_POST['submit'] == true and $fehler == false) {
-				
+
 			}
 		}
 	?>
