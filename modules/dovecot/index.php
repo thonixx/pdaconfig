@@ -17,8 +17,22 @@
 		<?php
 
 			include "secure_data.php";
-			$dbh = mysqli_connect($mysql_server, $mysql_user, $mysql_pass) or die('<span class="red medium">mysql connection to mailserver failed. really failed.</span>');
-			mysqli_select_db($dbh, 'mailserver') or die('no such database');
+
+			if ($mysql_use_ssl == true) {
+
+				$dbh = mysqli_init()
+					or die ('<span class="red medium">mysqli_init failed</span>');
+				mysqli_ssl_set($dbh, $mysql_key, $mysql_crt, $mysql_ca, NULL, NULL);
+				mysqli_real_connect($dbh, $mysql_server, $mysql_user, $mysql_pass, 'p_mail')
+					or die('<span class="red medium">mysql connection to mailserver failed. really failed.</span>');
+
+			} else {
+
+				$dbh = mysqli_connect($mysql_server, $mysql_user, $mysql_pass, 'p_mail')
+					or die('<span class="red medium">mysql connection to mailserver failed. really failed.</span>');
+
+			}
+
 			$mail = new mail();
 			echo '<div style="float: right; width: 45%">';
 			echo $mail->mkMailForm();
