@@ -205,7 +205,7 @@
 			$this->return .= '<div style="padding: 15px 15px 0 15px">';
 			$this->return .= lang('password').': ';
 			if(isset($_POST['submit']) and empty($_POST['password'])) {$this->return .= $errorwarning;$error = true;} // output of error message
-			$this->return .= '<br /><input type="text" name="password" value="" /><br />';
+			$this->return .= '<br /><input type="password" name="password" value="" /><br />';
 			$this->return .= '<br /><input type="submit" name="submit" value="'.lang('savebutton').'" />';
 
 			// save if password is not empty
