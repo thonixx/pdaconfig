@@ -1,9 +1,4 @@
 <p><?php echo lang('introduction_status'); ?></p>
-<div class="status">
-	<div><?php echo service('apache2') ?></div>
-	<div><?php echo service('postfix') ?></div>
-	<div><?php echo service('dovecot') ?></div>
-</div>
 <p>
 	<a href="?module=<?php echo $_GET['module'] ?>&amp;restart=apache2"><?php echo lang('restart') ?> Apache2</a><br />
 	<?php if($_GET['restart'] == 'apache2') echo service('apache2', 'restart') ?>

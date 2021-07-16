@@ -207,23 +207,4 @@
 			?>
 		</p>
 	</div>
-	<h2><?php echo lang('manage') ?></h2>
-	<div class="pda-main-content">
-		<div class="status">
-			<div><?php echo service('apache2') ?></div>
-			<div><?php echo service('mysql') ?></div>
-		</div>
-		<p>
-			<?php
-
-				// restart service
-				if($_GET['server'] == 'restart') {
-					echo service('apache2', 'restart');
-					echo service('mysql', 'restart');
-				}
-
-			?>
-			<a href="<?php echo $request_url ?>&amp;server=restart">&raquo; <?php echo lang('restart') ?></a>
-		</p>
-	</div>
 </div>
