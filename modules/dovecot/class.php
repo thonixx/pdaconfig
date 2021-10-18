@@ -139,7 +139,7 @@
 
 					$realdomainID = $domainID ? $domainID : mysqli_insert_id();
 
-					$query1 = mysqli_query($this->mysqli_link, 'INSERT INTO `virtual_users` (`email`, `domain_id`, `password`) VALUES ("'.mysqli_real_escape_string($this->mysqli_link, $_POST['email']).'", "'.$realdomainID.'", MD5("'.mysqli_real_escape_string($this->mysqli_link, $_POST['password']).'") )');
+					$query1 = mysqli_query($this->mysqli_link, 'INSERT INTO `virtual_users` (`email`, `domain_id`, `password`) VALUES ("'.mysqli_real_escape_string($this->mysqli_link, $_POST['email']).'", "'.$realdomainID.'", "'.md5($_POST['password']).'" )');
 
 					// check if alias already exists
 					$aliasFetch = mysqli_fetch_array(mysqli_query($this->mysqli_link, 'SELECT 1 FROM `virtual_aliases` WHERE `source` LIKE `destination` AND `source` = "'.mysqli_real_escape_string($this->mysqli_link, $_POST['email']).'"'));
@@ -211,7 +211,7 @@
 			// save if password is not empty
 			if($error == false and isset($_POST['submit'])) {
 				// output a success notification or an error
-				if(mysqli_query($this->mysqli_link, 'UPDATE `virtual_users` SET `password` = MD5("'.$_POST['password'].'") WHERE `id` = '.mysqli_real_escape_string($this->mysqli_link, $_GET['edit'])))
+				if(mysqli_query($this->mysqli_link, 'UPDATE `virtual_users` SET `password` = "'.md5($_POST['password']).'" WHERE `id` = '.mysqli_real_escape_string($this->mysqli_link, $_GET['edit'])))
 					$this->return .= lang('successsaving');
 				else
 					$this->return .= lang('failedsaving');
