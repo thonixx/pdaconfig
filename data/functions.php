@@ -17,7 +17,8 @@
 
 		// put user defined language into array at top position
         global $mysql_connect;
-		$userLanuageQuery = mysqli_query($mysql_connect, 'SELECT `lang` FROM `authentication` WHERE `id` = '.$_SESSION['login_session']);
+        $login_sess = $_SESSION['login_session'] ? $_SESSION['login_session'] : '0';
+		$userLanuageQuery = mysqli_query($mysql_connect, 'SELECT `lang` FROM `authentication` WHERE `id` = '.$login_sess);
 		$userLanguageAssoc = mysqli_fetch_assoc($userLanuageQuery);
 		$langs[] = $userLanguageAssoc['lang'];
 		foreach($lang_parse[1] as $l) {
