@@ -90,7 +90,7 @@ DROP TABLE IF EXISTS `authentication`;
 CREATE TABLE `authentication` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(129) NOT NULL,
   `lang` varchar(2) NOT NULL DEFAULT 'en',
   `realname` varchar(32) DEFAULT NULL,
   `group` int(11) NOT NULL,
