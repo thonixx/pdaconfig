@@ -25,7 +25,7 @@
 	// only check if submit button was clicked
 	if(isset($_POST['login'])) {
 		// check for username and password combination and return id if successful and nothing if it failed
-		$check_sql = 'SELECT `id` FROM `authentication` WHERE `username` = "'.mysqli_real_escape_string($mysql_connect, $_POST['username']).'" AND `password` = "'.mysqli_real_escape_string($mysql_connect, md5($_POST['password'])).'"';
+		$check_sql = 'SELECT `id` FROM `authentication` WHERE `username` = "'.mysqli_real_escape_string($mysql_connect, $_POST['username']).'" AND `password` = "'.mysqli_real_escape_string($mysql_connect, hash('sha3-512', $_POST['password'])).'"';
 		$check_query = mysqli_query($mysql_connect, $check_sql);
 
 		// fetch user id
