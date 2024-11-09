@@ -90,6 +90,19 @@
 				</div>
 			</div>
 			<?php
+		} else {
+			$i = 0;
+			foreach($module_array as $module) {
+				if($module['status'] == true) {
+					$i++;
+	?>
+					<h2><?php echo lang('module').' '.$i.': '.$module['nav'] ?></h2>
+					<div class="pda-main-content">
+						<?php include($moduleOverview->dir.'/'.$module['name'].'/'.'status.php'); ?>
+					</div>
+	<?php
+				}
+			}
 		}
 	?>
 </div>
