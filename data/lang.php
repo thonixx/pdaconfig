@@ -1,18 +1,18 @@
 <?php
-	
+
 	/* PDAconfig
-	 * 
+	 *
 	 * scripted by Michael Tanner for Schleuniger Montagen AG
 	 * www.white-tiger.ch
 	 * www.schleuniger-montagen.ch
 	 */
-	
+
 	// this is the language file
 	// structure: $language['SHORT LANGUAGE']['ID'] = 'TEXT STRING';
 	// example: $language['de']['1'] = 'Hallo Welt!';
-	
+
 	// usage in scripts: $lang['ID'];
-	
+
 	$language['en']['language'] = 'en';
 	$language['en']['software'] = 'PDAconfig';
 	$language['en']['pdaconfigtitle'] = 'PDAconfig | Server configuration tool';
@@ -53,9 +53,6 @@
 	$language['en']['fail'] = 'Something failed.';
 	$language['en']['successsaving'] = 'The data was saved successfully.';
 	$language['en']['failedsaving'] = 'Something failed. Could not save.';
-	$language['en']['restart'] = 'Restart the service';
-	$language['en']['start'] = 'Start the service';
-	$language['en']['stop'] = 'Stop the service';
 	$language['en']['wrongmail'] = 'Wrong format for email.';
-	
+
 ?>

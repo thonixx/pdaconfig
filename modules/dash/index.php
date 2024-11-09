@@ -90,19 +90,6 @@
 				</div>
 			</div>
 			<?php
-		} else {
-			$i = 0;
-			foreach($module_array as $module) {
-				if($module['status'] == true) {
-					$i++;
-	?>
-					<h2><?php echo lang('module').' '.$i.': '.$module['nav'] ?></h2>
-					<div class="pda-main-content">
-						<?php include($moduleOverview->dir.'/'.$module['name'].'/'.'status.php'); ?>
-					</div>
-	<?php
-				}
-			}
 		}
 	?>
 </div>
@@ -179,16 +166,5 @@
 			<?php echo lang('datemonth'); ?><br />
 			<?php echo lang('time'); ?>
 		</div>
-		<hr />
-		<p>
-			<a href="?module=<?php echo $_GET['module'] ?>&amp;restart=apache2"><?php echo lang('restart') ?> Apache2</a><br />
-			<?php if($_GET['restart'] == 'apache2') echo service('apache2', 'restart') ?>
-			<a href="?module=<?php echo $_GET['module'] ?>&amp;restart=mysql"><?php echo lang('restart') ?> MySQL</a><br />
-			<?php if($_GET['restart'] == 'mysql') echo service('mysql', 'restart') ?>
-			<a href="?module=<?php echo $_GET['module'] ?>&amp;restart=postfix"><?php echo lang('restart') ?> Postfix</a><br />
-			<?php if($_GET['restart'] == 'postfix') echo service('postfix', 'restart') ?>
-			<a href="?module=<?php echo $_GET['module'] ?>&amp;restart=dovecot"><?php echo lang('restart') ?> Dovecot</a><br />
-			<?php if($_GET['restart'] == 'dovecot') echo service('dovecot', 'restart') ?>
-		</p>
 	</div>
 </div>

@@ -80,39 +80,4 @@
 		return $mailArray;
 	}
 
-	function service($service, $action = '', $raw = '') {
-		// written by Michael Tanner for Schleuniger Montagen AG
-		if(empty($action) or $action === true) $action = 'status';
-
-		if($action == 'restart' and $service != 'apache2') {
-			$string = 'sudo service '.$service.' stop';
-			shell_exec($string);
-			sleep(3); // preventing dovecot from killing itself, it needs some time to stop all child processes
-			$string = 'sudo service '.$service.' start';
-			$output = shell_exec($string);
-		} elseif($service == 'apache2' and $action == 'restart') {
-			$output = shell_exec('sudo service apache2 graceful');
-		} else {
-			$string = 'sudo service '.$service.' '.$action;
-			$output = shell_exec($string);
-		}
-
-		if($raw == true) return var_dump($output);
-
-		$return = ucfirst($service).': ';
-		if((strpos($output, 'running') > 0 or strpos($output, 'done')) and $action == 'restart') return '<p class="green">('.ucfirst($service).') '.lang($action).':<br />'.lang('success').'</p>';
-		if(strpos($output, 'running') == 0 and $action == 'restart') return '<p class="red">('.ucfirst($service).') '.lang($action).':<br />'.lang('fail').'</p>';
-
-		if(strpos($output, 'waiting') > 0 and $action == 'stop') return '<p class="green">('.ucfirst($service).') '.lang($action).':<br />'.lang('success').'</p>';
-		if(strpos($output, 'waiting') == 0 and $action == 'stop') return '<p class="red">('.ucfirst($service).') '.lang($action).':<br />'.lang('fail').'</p>';
-
-		if(strpos($output, 'running') > 0 and $action == 'start') return '<p class="green">('.ucfirst($service).') '.lang($action).':<br />'.lang('success').'</p>';
-		if(strpos($output, 'running') == 0 and $action == 'start') return '<p class="red">('.ucfirst($service).') '.lang($action).':<br />'.lang('fail').'</p>';
-
-		if(strpos($output, 'running') > 0 and $action == 'status') $return .= '<span class="ok">'.lang('running').'</span>';
-		else $return .= '<span class="nok">'.lang('notrunning').'</span>';
-
-		return $return;
-	}
-
 ?>

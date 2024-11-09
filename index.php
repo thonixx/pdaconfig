@@ -7,9 +7,6 @@
 	* www.schleuniger-montagen.ch
 	*/
 
-	// to check required time to provide the html file
-	$performancetime = microtime();
-
 	error_reporting(4096);
 	error_reporting(E_ERROR);
 	session_start();
@@ -137,7 +134,3 @@
 	</div>
 </body>
 </html>
-<!-- <?php
-	// Performance calculation
-	echo round((microtime()-$performancetime)*1000, 1);
-?> ms -->
