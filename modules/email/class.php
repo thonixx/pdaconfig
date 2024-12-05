@@ -63,19 +63,31 @@
 		public function mkAliasTable() {
 			global $modDir;
 
-			$this->sql = 'SELECT `id`, `source`, `destination` FROM `virtual_aliases` WHERE `source` NOT LIKE `destination` ORDER BY `source`';
-			$this->query = $this->loadQuery();
+            # catchall
+            $this->sql = 'SELECT `id`, `source`, `destination` FROM `virtual_aliases` WHERE `source` LIKE \'@%\' AND `destination` NOT LIKE \'spam@%\' ORDER BY `source`';
+			$this->query_catchall = $this->loadQuery();
 
-			// construct the whole table
-			$this->return = '<table style="width: 50%; float: left; margin: 20px 0;">';
+            # rest w/o spam@
+			$this->sql = 'SELECT `id`, `source`, `destination` FROM `virtual_aliases` WHERE `source` NOT LIKE `destination` AND `source` NOT LIKE \'@%\' AND `destination` NOT LIKE \'spam@%\' ORDER BY `source`, `destination`';
+			$this->query_aliases = $this->loadQuery();
+
+            # spam@
+			$this->sql = 'SELECT `id`, `source`, `destination` FROM `virtual_aliases` WHERE `source` NOT LIKE `destination` AND `destination` LIKE \'spam@%\' ORDER BY `source`';
+			$this->query_spam = $this->loadQuery();
+
+            // catchall table
+			$this->return = '<h1>'.lang('aliases_catchall').'</h1>';
+			$this->return .= '<table>';
 				$this->return .= '<tr>
 									<th>ID</th>
 									<th>'.lang('source').'</th>
 									<th>'.lang('destination').'</th>
 									<th>'.lang('options').'</th>
 								</tr>';
-				$counter = 1;
-				while($entry = mysqli_fetch_array($this->query)) {
+
+                // catchall list
+                $counter = 1;
+				while($entry = mysqli_fetch_array($this->query_catchall)) {
 					$this->return .= '<tr';
 					if(is_float($counter/2)) $this->return .= ' class="background"';
 					if($entry[0] == $_GET['adelete'] or $entry[0] == $_GET['aedit']) $this->return .= ' style="color: red;"';
@@ -93,6 +105,76 @@
 					$this->return .= '</tr>';
 					$counter++;
 				}
+
+            // end of table
+			$this->return .= '</table>';
+
+            // normal aliases table
+			$this->return .= '<h1>'.lang('aliases_wo_spam').'</h1>';
+			$this->return .= '<table>';
+				$this->return .= '<tr>
+									<th>ID</th>
+									<th>'.lang('source').'</th>
+									<th>'.lang('destination').'</th>
+									<th>'.lang('options').'</th>
+								</tr>';
+
+                // normal aliases list
+                $counter = 1;
+				while($entry = mysqli_fetch_array($this->query_aliases)) {
+					$this->return .= '<tr';
+					if(is_float($counter/2)) $this->return .= ' class="background"';
+					if($entry[0] == $_GET['adelete'] or $entry[0] == $_GET['aedit']) $this->return .= ' style="color: red;"';
+					$this->return .= '>';
+						$this->return .= '<td>'.$entry['id'].'</td>';
+						$this->return .= '<td>';
+						if(strpos($entry['source'], '@') == 0) $this->return .= '<em>'.lang('catchallfor').'</em> ';
+						$this->return .= $entry['source'].'</td>';
+						$this->return .= '<td>'.$entry['destination'].'</td>';
+						$this->return .= '<td>';
+						if($this->pdaconfigRight >= 6)
+							$this->return .= '<a href="?module='.$_GET['module'].'&amp;adelete='.$entry[0].'#editalias"><img src="'.$modDir.'delete.png" alt="'.lang('delete').'" /></a>'; // just a delete function. editing makes no sense.
+						else $this->return .= '&nbsp;';
+						$this->return .= '</td>';
+					$this->return .= '</tr>';
+					$counter++;
+				}
+
+            // end of table
+			$this->return .= '</table>';
+
+            // spam@ table
+			$this->return .= '<h1>'.lang('aliases_spam').'</h1>';
+			$this->return .= '<table>';
+				$this->return .= '<tr>
+									<th>ID</th>
+									<th>'.lang('source').'</th>
+									<th>'.lang('destination').'</th>
+									<th>'.lang('options').'</th>
+								</tr>';
+
+                // spam@ aliases list
+                $counter = 1;
+				while($entry = mysqli_fetch_array($this->query_spam)) {
+					$this->return .= '<tr';
+					if(is_float($counter/2)) $this->return .= ' class="background"';
+					if($entry[0] == $_GET['adelete'] or $entry[0] == $_GET['aedit']) $this->return .= ' style="color: red;"';
+					$this->return .= '>';
+						$this->return .= '<td>'.$entry['id'].'</td>';
+						$this->return .= '<td>';
+						if(strpos($entry['source'], '@') == 0) $this->return .= '<em>'.lang('catchallfor').'</em> ';
+						$this->return .= $entry['source'].'</td>';
+						$this->return .= '<td>'.$entry['destination'].'</td>';
+						$this->return .= '<td>';
+						if($this->pdaconfigRight >= 6)
+							$this->return .= '<a href="?module='.$_GET['module'].'&amp;adelete='.$entry[0].'#editalias"><img src="'.$modDir.'delete.png" alt="'.lang('delete').'" /></a>'; // just a delete function. editing makes no sense.
+						else $this->return .= '&nbsp;';
+						$this->return .= '</td>';
+					$this->return .= '</tr>';
+					$counter++;
+				}
+
+            # end of table
 			$this->return .= '</table>';
 
 			return $this->return;
