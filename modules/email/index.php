@@ -9,10 +9,10 @@
 
 ?>
 <div class="pda-content tworow">
-	<h2><?php echo lang('mailtitle') ?></h2>
+	<h2><?php echo lang('emailtitle') ?></h2>
 	<div class="pda-main-content">
 		<p>
-			<?php echo lang('maileditintro') ?>
+			<?php echo lang('emaileditintro') ?>
 		</p>
 		<?php
 
@@ -34,9 +34,6 @@
 			}
 
 			$mail = new mail();
-			echo '<div style="float: right; width: 45%">';
-			echo $mail->mkMailForm();
-			echo '</div>';
 			echo $mail->mkTable();
 
 		?>
@@ -49,9 +46,6 @@
 		</p>
 		<?php
 
-			echo '<div style="float: right; width: 45%">';
-			echo $mail->mkAliasForm();
-			echo '</div>';
 			echo $mail->mkAliasTable();
 
 		?>
@@ -78,5 +72,21 @@
 
 			?>
 		</p>
+	</div>
+	<h2><?php echo lang('addemail') ?></h2>
+	<div class="pda-main-content">
+        <?php
+
+			echo $mail->mkMailForm();
+
+        ?>
+	</div>
+	<h2><?php echo lang('addalias') ?></h2>
+	<div class="pda-main-content">
+        <?php
+
+			echo $mail->mkAliasForm();
+
+        ?>
 	</div>
 </div>

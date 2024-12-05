@@ -194,9 +194,8 @@
 				$errorwarning = '<span class="red">'.lang('mustnotbeempty').'</span>';
 				$wrongmail = '<span class="red">'.lang('wrongmail').'</span>';
 
-				$this->return .= '<form id="editemail" style="width: 100%; margin: 25px 0;" class="border" action="'.$request_url.'#editemail" method="post">';
-				$this->return .= '<h2>'.lang('add').'</h2>';
-				$this->return .= '<div style="padding: 15px 15px 0 15px">';
+				$this->return .= '<form action="'.$request_url.'#editemail" method="post">';
+				$this->return .= '<div>';
 				$this->return .= lang('email').': ';
 				if(isset($_POST['submit']) and empty($_POST['email'])) {$this->return .= $errorwarning;$error = true;} // output of error message
 				elseif(isset($_POST['submit']) and chkMail($_POST['email']) == false) {$this->return .= $wrongmail;$error = true;} // output of error message
@@ -258,15 +257,15 @@
                     if($this->query == true) $notification .= '<br /><span class="green bold">Alias: '.lang('success').'</span>';
                     else $notification = '<span class="red bold">'.lang('fail').'<br /><br />Alias Error: '.mysqli_error().'</span>';
 
-					$this->return .= '<div id="editemail" style="margin: 25px 0;" class="border">
-							<h2>'.lang('reallydelete').'</h2>
+					$this->return .= '<div>
+							<h3 style="color: red; margin-top: 0;">'.lang('reallydelete').'</h3>
 							<p style="padding: 0pt 20px;">
 								'.$notification.'
 							</p>
 						</div>';
 				} else {
-					$this->return .= '<div id="editemail" style="margin: 25px 0;" class="border">
-							<h2>'.lang('reallydelete').'</h2>
+					$this->return .= '<div>
+							<h3 style="color: red; margin-top: 0;">'.lang('reallydelete').'</h3>
 							<p style="padding: 0pt 20px;">
 								<a href="?module='.$_GET['module'].'&amp;delete='.$_GET['delete'].'&amp;reallyDelete='.$_GET['delete'].'#editemail">
 									<img src="img/yes.png" alt="Yes"> '.lang('yes').', '.lang('deleteit').'</a><br><br>
@@ -286,9 +285,9 @@
 			// general error warning for implementation
 			$errorwarning = '<span class="red">'.lang('mustnotbeempty').'</span>';
 
-			$this->return .= '<form id="editemail" style="width: 100%; margin: 25px 0;" class="border" action="'.$request_url.'#editemail" method="post">';
-			$this->return .= '<h2>'.$editValues['email'].'</h2>';
-			$this->return .= '<div style="padding: 15px 15px 0 15px">';
+			$this->return .= '<form action="'.$request_url.'#editemail" method="post">';
+			$this->return .= '<h3 style="color: red; margin-top: 0;">Email: '.$editValues['email'].'</h3>';
+			$this->return .= '<div>';
 			$this->return .= lang('password').': ';
 			if(isset($_POST['submit']) and empty($_POST['password'])) {$this->return .= $errorwarning;$error = true;} // output of error message
 			$this->return .= '<br /><input type="password" name="password" value="" /><br />';
@@ -330,14 +329,13 @@
 				$checkArray2 = mysqli_fetch_array($checkQuery2);
 				$checkifexists2 = $checkArray2[0] > 0 ? true : false;
 
-				$this->return .= '<form id="editalias" style="width: 100%; margin: 25px 0;" class="border" action="'.$request_url.'#editalias" method="post">';
-				$this->return .= '<h2>'.lang('add').'</h2>';
-				$this->return .= '<div style="padding: 15px 15px 0 15px">';
-				$this->return .= lang('frommail').': <br /><em class="small grey">'.lang('catchallinfo').'</em>';
+				$this->return .= '<form action="'.$request_url.'#editalias" method="post">';
+				$this->return .= '<div>';
+				$this->return .= lang('fromemail').': <br /><em class="small grey">'.lang('catchallinfo').'</em>';
 				if(isset($_POST['asubmit']) and empty($_POST['from'])) {$this->return .= '<br />'.$errorwarning;$error = true;} // output of error message
 				elseif(isset($_POST['asubmit']) and strpos($_POST['from'], '@') === false) {$this->return .= '<br />'.$wrongmail;$error = true;} // output of error message
 				$this->return .= '<br /><input type="text" name="from" value="'.$_POST['from'].'" /><br />';
-				$this->return .= lang('tomail').': ';
+				$this->return .= lang('toemail').': ';
 				if(isset($_POST['asubmit']) and empty($_POST['to'])) {$this->return .= $errorwarning;$error = true;} // output of error message
 				elseif(isset($_POST['asubmit']) and chkMail($_POST['to'], 'catchall') == false) {$this->return .= $wrongmail;$error = true;} // output of error message
 				$this->return .= '<br /><input type="text" name="to" value="'.$_POST['to'].'" /><br />';
@@ -390,15 +388,15 @@
 				else $notification = '<span class="red bold">'.lang('fail').'<br /><br />Error: '.mysqli_error().'</span>';
 
 				if($_GET['reallyDelete'] == $_GET['adelete']) {
-					$this->return .= '<div id="editalias" style="margin: 25px 0;" class="border">
-							<h2>'.lang('reallydelete').'</h2>
+					$this->return .= '<div>
+							<h3 style="color: red; margin-top: 0;">'.lang('reallydelete').'</h3>
 							<p style="padding: 0pt 20px;">
 								'.$notification.'
 							</p>
 						</div>';
 				} else {
-					$this->return .= '<div id="editalias" style="margin: 25px 0;" class="border">
-							<h2>'.lang('reallydelete').'</h2>
+					$this->return .= '<div>
+							<h3 style="color: red; margin-top: 0;">'.lang('reallydelete').'</h3>
 							<p style="padding: 0pt 20px;">
 								<a href="?module='.$_GET['module'].'&amp;adelete='.$_GET['adelete'].'&amp;reallyDelete='.$_GET['adelete'].'#editemail">
 									<img src="img/yes.png" alt="Yes"> '.lang('yes').', '.lang('deleteit').'</a><br><br>

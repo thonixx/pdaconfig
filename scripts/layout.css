@@ -1,5 +1,5 @@
 /* Stylesheet for main application of PDAconfig
- * 
+ *
  * scripted by Michael Tanner for Schleuniger Montagen AG
  * www.white-tiger.ch
  * www.schleuniger-montagen.ch
@@ -12,17 +12,17 @@ body {
 	padding: 10px 0 0 0;
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(top, #DEDEDE 0%, #FFFFFF 80px);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(top, #DEDEDE 0%, #FFFFFF 80px);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(top, #DEDEDE 0%, #FFFFFF 80px);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #DEDEDE), color-stop(80px, #FFFFFF));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(top, #DEDEDE 0%, #FFFFFF 80px);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(top, #DEDEDE 0%, #FFFFFF 80px);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF')"; /* IE8 */
@@ -123,17 +123,17 @@ div#pda-nav div#nav a:hover, div#pda-nav div#nav a.chosen {
 	padding-bottom: 10px;
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(top, rgba(238, 238, 238, 0.8) 0%, rgba(255, 255, 255, 0.8) 70px);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(top, rgba(238, 238, 238, 0.8) 0%, rgba(255, 255, 255, 0.8) 40px);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(top, rgba(238, 238, 238, 0.8) 0%, rgba(255, 255, 255, 0.8) 70px);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(238, 238, 238, 0.8)), color-stop(70px, rgba(255, 255, 255, 0.8)));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(top, rgba(238, 238, 238, 0.8) 0%, rgba(255, 255, 255, 0.8) 70px);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(top, rgba(238, 238, 238, 0.8) 0%, rgba(255, 255, 255, 0.8) 70px);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF')"; /* IE8 */
@@ -225,17 +225,17 @@ div.pda-content h2, div.pda-dash h2 {
 	box-shadow: 0px 0px 3px 0px #666;
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00ABEF), color-stop(1, #0E6DB1));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#00ABEF', EndColorStr='#0E6DB1'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#00ABEF', EndColorStr='#0E6DB1')"; /* IE8 */
@@ -247,17 +247,17 @@ div.pda-content .pda-main-content, div.pda-dash .pda-main-content {
 	border-top: 1px solid #7070A9;
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(top, #EEEEEE 0%, #FFFFFF 40px);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(top, #EEEEEE 0%, #FFFFFF 40px);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(top, #EEEEEE 0%, #FFFFFF 40px);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #EEEEEE), color-stop(40px, #FFFFFF));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(top, #EEEEEE 0%, #FFFFFF 40px);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(top, #EEEEEE 0%, #FFFFFF 40px);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF')"; /* IE8 */
@@ -278,20 +278,20 @@ div#pda-footer {
 	-webkit-box-shadow: 0px 0px 1px 0px #666;
 	-moz-box-shadow: 0px 0px 1px 0px #666;
 	box-shadow: 0px 0px 1px 0px #666;
-	
+
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(top, rgba(222, 222, 222, 0.8) -50px, rgba(255, 255, 255, 0.8) 50px);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(top, rgba(222, 222, 222, 0.8) -50px, rgba(255, 255, 255, 0.8) 50px);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(top, rgba(222, 222, 222, 0.8) 0%, rgba(255, 255, 255, 0.8) 50px);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(222, 222, 222, 0.8)), color-stop(50px, rgba(255, 255, 255, 0.8)));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(top, rgba(222, 222, 222, 0.8) 0%, rgba(255, 255, 255, 0.8) 50px);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(top, rgba(222, 222, 222, 0.8) -50px, rgba(255, 255, 255, 0.8) 50px);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF')"; /* IE8 */
@@ -315,26 +315,26 @@ p {
 
 form {
 	margin: 0 auto;
-	width: 80%;
+	width: 100%;
 		}
 
 form div input, form div textarea {
-	margin: 5px 10px 15px 20px;
+	margin: 5px 5px 15px 20px;
 	padding: 2px 10px;
 	height: 22px;
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(bottom, rgba(238, 238, 238, 0.75) 0%, rgba(255, 255, 255, 0.75) 18px);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(bottom, rgba(238, 238, 238, 0.75) 0%, rgba(255, 255, 255, 0.75) 18px);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(bottom, rgba(238, 238, 238, 0.75) 0%, rgba(255, 255, 255, 0.75) 18px);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(238, 238, 238, 0.75)), color-stop(18px, rgba(255, 255, 255, 0.75)));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(bottom, rgba(238, 238, 238, 0.75) 0%, rgba(255, 255, 255, 0.75) 18px);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(bottom, rgba(238, 238, 238, 0.75) 0%, rgba(255, 255, 255, 0.75) 18px);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF')"; /* IE8 */
@@ -357,17 +357,17 @@ form div select {
 form div input:hover, form div input:focus, form div textarea:hover, form div textarea:focus {
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-	/* IE10 */ 
+	/* IE10 */
 	background-image: -ms-linear-gradient(top, rgba(238, 238, 238, 0.75) -5px, rgba(255, 255, 255, 0.75) 18px);
-	/* Mozilla Firefox */ 
+	/* Mozilla Firefox */
 	background-image: -moz-linear-gradient(top, rgba(238, 238, 238, 0.75) -5px, rgba(255, 255, 255, 0.75) 18px);
-	/* Opera */ 
+	/* Opera */
 	background-image: -o-linear-gradient(top, rgba(238, 238, 238, 0.75) -5px, rgba(255, 255, 255, 0.75) 18px);
-	/* Webkit (Safari/Chrome 10) */ 
+	/* Webkit (Safari/Chrome 10) */
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(-5px, rgba(238, 238, 238, 0.75)), color-stop(18px, rgba(255, 255, 255, 0.75)));
-	/* Webkit (Chrome 11+) */ 
+	/* Webkit (Chrome 11+) */
 	background-image: -webkit-linear-gradient(top, rgba(238, 238, 238, 0.75) -5px, rgba(255, 255, 255, 0.75) 18px);
-	/* Proposed W3C Markup */ 
+	/* Proposed W3C Markup */
 	background-image: linear-gradient(top, rgba(238, 238, 238, 0.75) -5px, rgba(255, 255, 255, 0.75) 18px);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#FFFFFF', EndColorStr='#EEEEEE'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#FFFFFF', EndColorStr='#EEEEEE')"; /* IE8 */
@@ -410,17 +410,17 @@ table th {
 	height: 35px;
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00ABEF), color-stop(1, #0E6DB1));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(top, #00ABEF 0%, #0E6DB1 100%);
         filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#00ABEF', EndColorStr='#0E6DB1'); /* IE6,IE7 */
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#00ABEF', EndColorStr='#0E6DB1')"; /* IE8 */
@@ -431,7 +431,7 @@ table tr:first-child th:first-child {
 	-webkit-border-top-left-radius: 5px;
 	border-top-left-radius: 5px;
 		}
-	
+
 table tr:first-child th:last-child {
 	-moz-border-radius-topright: 5px;
 	-webkit-border-top-right-radius: 5px;
@@ -443,17 +443,17 @@ table tr:first-child th:last-child {
 table tr.background{
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(bottom, rgba(200, 200, 200, 0.8) -50px, rgba(255, 255, 255, 0.8) 100%);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(bottom, rgba(200, 200, 200, 0.8) -50px, rgba(255, 255, 255, 0.8) 100%);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(bottom, rgba(222, 222, 222, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(222, 222, 222, 0.8)), color-stop(100%, rgba(255, 255, 255, 0.8)));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(bottom, rgba(222, 222, 222, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(bottom, rgba(222, 222, 222, 0.8) -50px, rgba(255, 255, 255, 0.8) 100%);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF'); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#FFFFFF')"; /* IE8 */
@@ -504,17 +504,17 @@ table tr *:last-child {
 	padding: 10px 10px 10px 30px;
 	/* background gradient
 	Source: https://ie.microsoft.com/testdrive/graphics/cssgradientbackgroundmaker/ */
-		/* IE10 */ 
+		/* IE10 */
 		background-image: -ms-linear-gradient(left, #00ABEF 0%, #0E6DB1 20px, #EEEEEE 20px, #FFFFFF 60px);
-		/* Mozilla Firefox */ 
+		/* Mozilla Firefox */
 		background-image: -moz-linear-gradient(left, #00ABEF 0%, #0E6DB1 20px, #EEEEEE 20px, #FFFFFF 60px);
-		/* Opera */ 
+		/* Opera */
 		background-image: -o-linear-gradient(left, #00ABEF 0%, #0E6DB1 20px, #EEEEEE 20px, #FFFFFF 60px);
-		/* Webkit (Safari/Chrome 10) */ 
+		/* Webkit (Safari/Chrome 10) */
 		background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #00ABEF), color-stop(20px, #0E6DB1), color-stop(20px, #EEEEEE), color-stop(60px, #FFFFFF));
-		/* Webkit (Chrome 11+) */ 
+		/* Webkit (Chrome 11+) */
 		background-image: -webkit-linear-gradient(left, #00ABEF 0%, #0E6DB1 20px, #EEEEEE 20px, #FFFFFF 60px);
-		/* Proposed W3C Markup */ 
+		/* Proposed W3C Markup */
 		background-image: linear-gradient(left, #00ABEF 0%, #0E6DB1 20px, #EEEEEE 20px, #FFFFFF 60px);
 	background-image: linear-gradient(left, #00ABEF 0%, #0E6DB1 20px, #FFFFFF 20px);
 	border-left: 1px solid #8FE0FF;
