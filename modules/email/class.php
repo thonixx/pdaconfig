@@ -161,17 +161,21 @@
 			// if email was marked for deletion
 			if($_GET['delete'] > 0) {
 				// query the email address
-				$delEmail = mysqli_fetch_assoc(mysqli_query($this->mysqli_link, 'SELECT `email` FROM `virtual_users` WHERE `id` = '.mysqli_real_escape_string($this->mysqli_link, $_GET['reallyDelete'])));
+				$delEmail = mysqli_fetch_assoc(mysqli_query($this->mysqli_link, 'SELECT `email` FROM `virtual_users` WHERE `id` = '.mysqli_real_escape_string($this->mysqli_link, $_GET['delete'])));
 				$delEmail = $delEmail['email'];
 
-				// execute query and put output in variable
-				$this->query = mysqli_query($this->mysqli_link, 'DELETE FROM `virtual_users` WHERE `id` = '.mysqli_real_escape_string($this->mysqli_link, $_GET['reallyDelete']));
-				$this->query = mysqli_query($this->mysqli_link, 'DELETE FROM `virtual_aliases` WHERE `source` = "'.$delEmail.'" OR `destination` = "'.$delEmail.'"');
-
-				if($this->query == true) $notification = '<span class="green bold">'.lang('success').'</span>';
-				else $notification = '<span class="red bold">'.lang('fail').'<br /><br />Error: '.mysqli_error().'</span>';
-
 				if($_GET['reallyDelete'] == $_GET['delete']) {
+                    // execute query and put output in variable
+                    $this->query = mysqli_query($this->mysqli_link, 'DELETE FROM `virtual_users` WHERE `id` = '.mysqli_real_escape_string($this->mysqli_link, $_GET['reallyDelete']));
+
+                    if($this->query == true) $notification = '<span class="green bold">Mailbox: '.lang('success').'</span>';
+                    else $notification = '<span class="red bold">'.lang('fail').'<br /><br />Mailbox Error: '.mysqli_error().'</span>';
+
+                    $this->query = mysqli_query($this->mysqli_link, 'DELETE FROM `virtual_aliases` WHERE `source` = "'.$delEmail.'" OR `destination` = "'.$delEmail.'"');
+
+                    if($this->query == true) $notification .= '<br /><span class="green bold">Alias: '.lang('success').'</span>';
+                    else $notification = '<span class="red bold">'.lang('fail').'<br /><br />Alias Error: '.mysqli_error().'</span>';
+
 					$this->return .= '<div id="editemail" style="margin: 25px 0;" class="border">
 							<h2>'.lang('reallydelete').'</h2>
 							<p style="padding: 0pt 20px;">
