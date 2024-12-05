@@ -2,3 +2,5 @@ secure_data.php
 mysql_data.php
 *.key
 *.crt
+*.swp
+*.swo
